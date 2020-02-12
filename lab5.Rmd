@@ -33,6 +33,7 @@ library(gapminder)
 library(rjson)
 library(tidyverse)
 library(RColorBrewer)
+library(nycflights13)
 ```
 
 ## List subsetting
@@ -44,6 +45,21 @@ read this in using a function from package `rjson`.
 ```{r}
 json_file <- "https://www.govtrack.us/api/v2/role?current=true&role_type=senator"
 senators <- fromJSON(paste(readLines(json_file), collapse = ""))
+
+mysena <- senators[2][[1]][[1]]
+#str(mysena)
+mysena$person$birthday
+mysena2 <- senators$objects
+length(senators$objects)
+mybirthday <-list()
+for (i in c(1:length(senators$objects))){
+  if(mysena2[[i]][["state"]]=="NC"){
+    mybirthday <-list(mybirthday,mysena2[[i]][["person"]][["birthday"]])
+    
+  }
+}
+mybirthday
+
 ```
 
 ### Exercises

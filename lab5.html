@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -2712,6 +2711,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -2740,6 +2740,12 @@ summary {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -2823,13 +2829,18 @@ div.tocify {
 <pre class="r"><code>library(gapminder)
 library(rjson)
 library(tidyverse)
-library(RColorBrewer)</code></pre>
+library(RColorBrewer)
+library(nycflights13)</code></pre>
 </div>
 <div id="list-subsetting" class="section level2">
 <h2>List subsetting</h2>
 <p>The JSON data on US senators is available at <a href="https://www.govtrack.us/api/v2/role?current=true&amp;role_type=senator" class="uri">https://www.govtrack.us/api/v2/role?current=true&amp;role_type=senator</a>. We will read this in using a function from package <code>rjson</code>.</p>
 <pre class="r"><code>json_file &lt;- &quot;https://www.govtrack.us/api/v2/role?current=true&amp;role_type=senator&quot;
-senators &lt;- fromJSON(paste(readLines(json_file), collapse = &quot;&quot;))</code></pre>
+senators &lt;- fromJSON(paste(readLines(json_file), collapse = &quot;&quot;))
+
+senators[&quot;senator&quot;]</code></pre>
+<pre><code>$&lt;NA&gt;
+NULL</code></pre>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
 <ol style="list-style-type: decimal">
